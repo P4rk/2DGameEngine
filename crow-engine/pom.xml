@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lukecorpe.crow</groupId>
   <artifactId>crow-engine</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Crow Engine distribution</name>
 
@@ -14,12 +14,12 @@
     <java.version>1.7</java.version>
 
     <finalName>${project.artifactId}-${project.version}.jar</finalName>
-    <main.class>com.corpe.crowCore.Game</main.class>
+    <main.class>com.lukecorpe.crow.engine.Game</main.class>
     <natives>${basedir}/target/natives/</natives>
     <release.natives>natives/</release.natives>
   </properties>
   
-  <!--<build>
+  <build>
       <plugins>
          <plugin>
             <groupId>com.googlecode.mavennatives</groupId>
@@ -69,9 +69,9 @@
             </executions>
          </plugin>
       </plugins>
-   </build>-->
+   </build>
 
-  <build>
+<!--  <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -83,7 +83,7 @@
         </configuration>
       </plugin>
     </plugins>
-  </build>
+  </build>-->
 
   <dependencies>
     <dependency>
