@@ -103,7 +103,7 @@
       <version>${lwjgl.version}</version>
     </dependency>
     <dependency>
-       <groupId>com.cokeandcode.slick</groupId>
+       <groupId>slick</groupId>
        <artifactId>slick</artifactId>
        <version>${slick.version}</version>
      </dependency>
