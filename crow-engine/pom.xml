@@ -8,7 +8,7 @@
   <name>Crow Engine distribution</name>
 
   <properties>
-    <lwjgl.version>2.8.5</lwjgl.version>
+    <lwjgl.version>2.9.0</lwjgl.version>
     <slick.version>274</slick.version>
     <jbox2d.version>2.1.2.2</jbox2d.version>
     <java.version>1.7</java.version>
@@ -19,8 +19,47 @@
     <release.natives>natives/</release.natives>
   </properties>
   
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>${lwjgl.version}</version>
+    </dependency>
+    
+    <dependency>
+       <groupId>slick</groupId>
+       <artifactId>slick</artifactId>
+       <version>${slick.version}</version>
+     </dependency>
+     <dependency>
+      <groupId>org.lwjgl.lwjgl</groupId>
+      <artifactId>lwjgl_util</artifactId>
+      <version>${lwjgl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jbox2d</groupId>
+      <artifactId>jbox2d-library</artifactId>
+      <version>2.1.2.2</version>
+    </dependency>
+  </dependencies>
+
   <build>
       <plugins>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
          <plugin>
             <groupId>com.googlecode.mavennatives</groupId>
             <artifactId>maven-nativedependencies-plugin</artifactId>
@@ -84,35 +123,4 @@
       </plugin>
     </plugins>
   </build>-->
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl.lwjgl</groupId>
-      <artifactId>lwjgl</artifactId>
-      <version>${lwjgl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.lwjgl.lwjgl</groupId>
-      <artifactId>lwjgl_util</artifactId>
-      <version>${lwjgl.version}</version>
-    </dependency>
-    <dependency>
-       <groupId>slick</groupId>
-       <artifactId>slick</artifactId>
-       <version>${slick.version}</version>
-     </dependency>
-     <dependency>
-      <groupId>org.jbox2d</groupId>
-      <artifactId>jbox2d-library</artifactId>
-      <version>2.1.2.2</version>
-    </dependency>
-      
-  </dependencies>
-
 </project>

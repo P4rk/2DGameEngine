@@ -8,7 +8,7 @@
     <url>http://slick.cokeandcode.com</url>
 
     <properties>
-        <lwjgl.version>2.1.0</lwjgl.version>
+        <lwjgl.version>2.9.0</lwjgl.version>
         <phys2D.version>060408</phys2D.version>
         <platform>win32</platform>
     </properties>
@@ -22,22 +22,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.lwjgl</groupId>
+            <groupId>org.lwjgl.lwjgl</groupId>
             <artifactId>lwjgl</artifactId>
             <version>${lwjgl.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.lwjgl</groupId>
-            <artifactId>lwjgl-jinput</artifactId>
-            <version>${lwjgl.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.lwjgl</groupId>
-            <artifactId>lwjgl-native</artifactId>
-            <version>${lwjgl.version}</version>
-            <classifier>${platform}</classifier>
         </dependency>
 
         <dependency>
@@ -70,6 +57,13 @@
 
         <sourceDirectory>src</sourceDirectory>
 
+        <resources>
+          <resource>
+            <targetPath>org/newdawn/slick/data</targetPath>
+            <directory>${basedir}/src/org/newdawn/slick/data</directory>
+          </resource>
+        </resources>
+
         <plugins>
 
             <plugin>
@@ -77,12 +71,13 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.5</source>
-                    <target>1.5</target>
+                    <target>1.5</target>                    
                 </configuration>
             </plugin>
 
 
-            <plugin>
+
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <configuration>
@@ -107,7 +102,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
 
         </plugins>
