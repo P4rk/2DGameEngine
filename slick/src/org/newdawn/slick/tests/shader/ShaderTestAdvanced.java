@@ -102,7 +102,7 @@ public class ShaderTestAdvanced extends BasicGame {
 		g.fillRect(450, 350, 100, 100);
 	}
 	
-	@Override
+	
 	public void render(GameContainer container, Graphics screenGraphics) throws SlickException {
 		screenGraphics.clear();
 		

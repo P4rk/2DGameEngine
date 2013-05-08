@@ -35,7 +35,7 @@ public class RotateInUseTest extends BasicGame {
 		subImage = sheet2.getSubImage(40, 40, 50, 50);
 	}
 
-	@Override
+	
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		sheet1.startUse();

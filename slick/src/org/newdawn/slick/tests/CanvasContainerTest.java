@@ -135,19 +135,19 @@ public class CanvasContainerTest extends BasicGame {
 			});
 			canvasPanel.addKeyListener(new KeyListener() {
 				
-				@Override
+				
 				public void keyTyped(KeyEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
-				@Override
+				
 				public void keyReleased(KeyEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
-				@Override
+				
 				public void keyPressed(KeyEvent e) {
 					if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 						GameContainer container = canvasPanel.getContainer();

@@ -143,7 +143,7 @@ public class FireEmitter implements ParticleEmitter {
 	public void resetState() {
 	}
 
-	@Override
+	
 	public void resume() {
 		throw new UnsupportedOperationException("resume() not implemented for FireEmitter");
 	}

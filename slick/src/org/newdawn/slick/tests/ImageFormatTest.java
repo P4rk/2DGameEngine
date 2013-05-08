@@ -56,7 +56,7 @@ public class ImageFormatTest extends BasicGame {
     // nothing to do
   }
 
-  @Override
+  
   public void render(GameContainer container, Graphics g) throws SlickException {
     final int effectiveWidth = container.getWidth() - rgbaImage.getWidth();
     final int effectiveHeight = container.getHeight() - rgbaImage.getHeight();

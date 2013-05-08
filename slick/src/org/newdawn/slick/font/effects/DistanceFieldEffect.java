@@ -20,7 +20,7 @@ import org.newdawn.slick.font.Glyph;
  * using nothing but alpha testing so at no extra runtime cost.
  * 
  * <p> The technique is described in the SIGGRAPH 2007 paper
- * "Improved Alpha-Tested Magniﬁcation for Vector Textures and Special Effects" by Chris Green:
+ * "Improved Alpha-Tested Magni���cation for Vector Textures and Special Effects" by Chris Green:
  * <a href="http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf">
  * http://www.valvesoftware.com/publications/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf
  * </a>
@@ -192,7 +192,6 @@ public class DistanceFieldEffect implements ConfigurableEffect
 		inputG.fill(glyph.getShape());
 	}
 
-	@Override
 	public void draw(BufferedImage image, Graphics2D g, UnicodeFont unicodeFont, Glyph glyph) {
 		BufferedImage input = new BufferedImage(
 				upscale * glyph.getWidth(),
@@ -210,7 +209,7 @@ public class DistanceFieldEffect implements ConfigurableEffect
 		return "Distance field";
 	}
 
-	@Override
+	
 	public List getValues() {
 		List values = new ArrayList();
 		values.add(EffectUtil.colorValue("Color", getColor()));
@@ -219,7 +218,7 @@ public class DistanceFieldEffect implements ConfigurableEffect
 		return values;
 	}
 
-	@Override
+	
 	public void setValues(List values) {
 		for (Iterator iter = values.iterator(); iter.hasNext();) {
 			Value value = (Value)iter.next();

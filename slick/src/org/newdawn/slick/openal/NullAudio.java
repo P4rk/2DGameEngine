@@ -67,7 +67,7 @@ public class NullAudio implements Audio {
 		
 	}
 
-	@Override
+	
 	public boolean isPaused() {
 		// TODO Auto-generated method stub
 		return false;
