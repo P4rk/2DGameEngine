@@ -1,0 +1,12 @@
+{
+    "levelNumber" : 1,
+    "name": "thing",
+    "width" : 1600,
+    "height" : 1200,
+    "levelObjects" : {
+        "ground" :  {
+            "width" : 10,
+            "height" : 10
+        }
+    }
+}
