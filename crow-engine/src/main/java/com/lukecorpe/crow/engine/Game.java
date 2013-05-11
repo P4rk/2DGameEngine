@@ -10,6 +10,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import com.lukecorpe.crow.engine.level.Level;
+import com.lukecorpe.crow.engine.level.LevelLoader;
 import com.lukecorpe.crow.engine.menu.Menu;
 
 public class Game extends BasicGame {
@@ -107,6 +108,8 @@ public class Game extends BasicGame {
     	
     	cam = new Camera(this);
     	
+    	LevelLoader.loadLevel("src/main/resources/data/levels/level", this);
+    	
     	//http://www.java-gaming.org/index.php/topic,24671.0
     	getContainer().setMaximumLogicUpdateInterval(5);
     	getContainer().setMinimumLogicUpdateInterval(5);
@@ -133,6 +136,7 @@ public class Game extends BasicGame {
     		getCam().Draw();
     	}catch (Exception e){
     		e.printStackTrace();
+    		throw new RuntimeException(e);
     	}
     }
 
