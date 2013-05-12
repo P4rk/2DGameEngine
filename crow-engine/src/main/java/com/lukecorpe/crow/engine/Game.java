@@ -2,6 +2,8 @@ package com.lukecorpe.crow.engine;
 
 import java.util.ArrayList;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -12,6 +14,7 @@ import org.newdawn.slick.SlickException;
 import com.lukecorpe.crow.engine.level.Level;
 import com.lukecorpe.crow.engine.level.LevelLoader;
 import com.lukecorpe.crow.engine.menu.Menu;
+import com.lukecorpe.crow.engine.objects.GameObject;
 
 public class Game extends BasicGame {
 	
@@ -108,7 +111,7 @@ public class Game extends BasicGame {
     	
     	cam = new Camera(this);
     	
-    	LevelLoader.loadLevel("src/main/resources/data/levels/level", this);
+    	LevelLoader.loadLevel("src/main/resources/data/levels/level.lvl", this);
     	
     	//http://www.java-gaming.org/index.php/topic,24671.0
     	getContainer().setMaximumLogicUpdateInterval(5);
@@ -126,7 +129,8 @@ public class Game extends BasicGame {
             throws SlickException {
     	if(getInput().isKeyDown(Input.KEY_ESCAPE)) container.exit();
 		if(getInput().isKeyDown(Input.KEY_P)) Options.Instance.flipPause();
-		if(getInput().isKeyDown(Input.KEY_SPACE)) setGameState(GameState.inGame);
+		if(getInput().isKeyDown(Input.KEY_ENTER)) setGameState(GameState.inGame);
+		if(getInput().isKeyDown(Input.KEY_SPACE)) getCurrentLevel().setGravity(new Vec2(0, -getCurrentLevel().getGravity().y));
         getCam().update(delta);
     }
 

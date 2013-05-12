@@ -1,0 +1,24 @@
+{
+    "levelNumber" : 1,
+    "name": "thing",
+    "width" : 800,
+    "height" : 600,
+    "levelObjects" : {
+        "1": {
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "50",
+            "startPositionY" : "10",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+        "2":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "10",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        }
+    }
+}
