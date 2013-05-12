@@ -17,8 +17,8 @@ import org.newdawn.slick.SlickException;
 
 import com.lukecorpe.crow.engine.Component;
 import com.lukecorpe.crow.engine.Game;
-import com.lukecorpe.crow.engine.Options;
 import com.lukecorpe.crow.engine.interfaces.Drawable;
+import com.lukecorpe.crow.engine.interfaces.Updatable;
 
 public class Level extends Component{
 	
@@ -54,6 +54,7 @@ public class Level extends Component{
 	    positionIterations = 2;
 		
 	    drawList = new ArrayList<Drawable>();
+	    
 		/*getPlayer().setTexture("src/main/resources/Images/SpriteSheet.png", 75, 96);
 		getPlayer().addAnimation("Idle", new Vector2f(2, 2), new Vector2f(2, 2), 2, 1, true);
 		getPlayer().addAnimation("Walk", new Vector2f(0, 0), new Vector2f(5, 1), 5, 15, true);
@@ -77,31 +78,67 @@ public class Level extends Component{
         	e.printStackTrace();
         	throw new RuntimeException(e);
         }
-		//createBox();
+		createBounds();
 		/*
 		for(GameObject obj : objects){
 			obj.finalisePositions();
 		}*/
 	}
 
-	private void createBox() {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.STATIC;
-		bodyDef.position.set(new Vec2());
-		Body body = this.getWorld().createBody(bodyDef);
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(0, height);
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = shape;
-		body.createFixture(fixtureDef);
+	private void createBounds() {
+		for(int i=0; i<4; i++){
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.type = BodyType.STATIC;
+			switch(i){
+				case 0:
+					//Top
+					bodyDef.position.set(new Vec2(0,0));
+					break;
+				case 1:
+					//Right
+					bodyDef.position.set(new Vec2(width,0));
+					break;
+				case 2:
+					//Bottom
+					bodyDef.position.set(new Vec2(0,height));
+					break;
+				case 3:
+					//Left
+					bodyDef.position.set(new Vec2(0,0));
+					break;
+			}
+			Body body = this.getWorld().createBody(bodyDef);
+			PolygonShape shape = new PolygonShape();
+			switch(i){
+				case 0:
+					//Top
+					shape.setAsBox(width/2, 0);
+					break;
+				case 1:
+					//Right
+					shape.setAsBox(0, height/2);
+					break;
+				case 2:
+					//Bottom
+					shape.setAsBox(width/2, 0);
+					break;
+				case 3:
+					//Left
+					shape.setAsBox(0, height/2);
+					break;
+			}
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.shape = shape;
+			body.createFixture(fixtureDef);
+		}
 	}
 	public void update(int delta) {
 		
 		bg.update(delta);
 		world.step(timeStep, velocityIterations, positionIterations);
-		/*for (GameObject obj : objects) {
+		for (Updatable obj : drawList) {
 			obj.update(delta);
-		}*/
+		}
 	}
 	public void draw(){
 		renderTargetGraph.setBackground(new Color(5, 34, 69));
