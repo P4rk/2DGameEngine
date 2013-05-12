@@ -36,6 +36,7 @@ public class GameObject implements Drawable {
 		
 		_texture = new Image(imagePath);
 	    level.getDrawList().add(this);
+	    _texture.setCenterOfRotation(_texture.getWidth()/2, _texture.getHeight()/2);
 		
 		bodyDef = new BodyDef();
 		bodyDef.type = type;
@@ -65,8 +66,9 @@ public class GameObject implements Drawable {
 	@Override
 	public void draw(Graphics renderTargetGraph) {
 		if(getLevel().getGame().getCam().inFrame(this)){
+			getTexture().setRotation((float) Math.toDegrees(body.getAngle()));
 			renderTargetGraph.drawImage(
-					getTexture().getFlippedCopy(isFlipHorizontally(), isFlipVertically()),
+					getTexture(),
 					getPosition().getX(),
 					getPosition().getY());
 		}
