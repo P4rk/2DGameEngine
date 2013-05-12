@@ -84,7 +84,7 @@ public class Camera extends Component{
 
 
 	private int _shakeTargetY = 0;
-    
+	
     public Camera(Game game)
     {
     	super(game);
@@ -97,11 +97,11 @@ public class Camera extends Component{
     
     public Boolean inFrame(GameObject obj)
     {
-    	if ((obj.getPosition().getY() - obj.getBounding().getHeight()> getPosition().getY() + getGame().getContainer().getHeight()) || (obj.getPosition().getX()- obj.getBounding().getWidth()  > getPosition().getX() + getGame().getContainer().getWidth()))
+    	if ((obj.getPosition().getY() - obj.getTexture().getHeight()> getPosition().getY() + getGame().getContainer().getHeight()) || (obj.getPosition().getX()- obj.getTexture().getWidth()  > getPosition().getX() + getGame().getContainer().getWidth()))
         {
             return false;
         }
-        if ((obj.getPosition().getY()+ obj.getBounding().getHeight() < getPosition().getY()) || (obj.getPosition().getX()+ obj.getBounding().getWidth() < getPosition().getX()))
+        if ((obj.getPosition().getY()+ obj.getTexture().getHeight() < getPosition().getY()) || (obj.getPosition().getX()+ obj.getTexture().getWidth() < getPosition().getX()))
         {
             return false;
         }
@@ -323,7 +323,7 @@ public class Camera extends Component{
 	    	getGame().getContainer().getGraphics().drawString("Camera position : "+ getPosition(), 10, 30);
 
 	    	//getGame().getContainer().getGraphics().drawString("Target position : "+ getTarget().getPosition(), 10,50);
-	    	getGame().getContainer().getGraphics().drawString("Gravity "+Options.Instance.Gravity(), 10, 90);
+	    	getGame().getContainer().getGraphics().drawString("Gravity "+getGame().getCurrentLevel().getGravity(), 10, 90);
 
 	    	if(getTarget()!=null) {
 	    		getGame().getContainer().getGraphics().drawString("Target position : "+ getTarget().getPosition(), 10, 50 );
