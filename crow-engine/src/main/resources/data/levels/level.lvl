@@ -5,18 +5,26 @@
     "height" : 600,
     "levelObjects" : {
         "1": {
-            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
             "bodyType" : "DYNAMIC",
-            "startPositionX" : "50",
-            "startPositionY" : "10",
+            "startPositionX" : "45",
+            "startPositionY" : "100",
             "density" : "1",
             "friction" : "0.3"
         },
         "2":{
             "relitaveImagePath" : "src/main/resources/images/block.png",
             "bodyType" : "STATIC",
-            "startPositionX" : "10",
+            "startPositionX" : "0",
             "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+        "3": {
+            "relitaveImagePath" : "src/main/resources/images/plank.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "30",
+            "startPositionY" : "0",
             "density" : "1",
             "friction" : "0.3"
         }
