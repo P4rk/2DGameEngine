@@ -1,5 +1,14 @@
 package com.lukecorpe.crow.engine.level;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -9,6 +18,7 @@ import org.newdawn.slick.SlickException;
 import com.lukecorpe.crow.engine.Component;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.Options;
+import com.lukecorpe.crow.engine.interfaces.Drawable;
 
 public class Level extends Component{
 	
@@ -24,21 +34,26 @@ public class Level extends Component{
 	
 	boolean doSleep = true;
 	
+	private List<Drawable> drawList;
+	
 	float timeStep;
     int velocityIterations;
     int positionIterations;
+    
+    Vec2 intiGravity = new Vec2(0, 98f);
     
 	public Level(Game game){
 		super(game);
 		bg = new Background(getGame());
 		
 		//Jbox2d
-		this.world = new World(Options.Instance.Gravity(), false);
+		this.world = new World(intiGravity, false);
 		
 		timeStep = 1.0f / 60.f;
 	    velocityIterations = 6;
 	    positionIterations = 2;
 		
+	    drawList = new ArrayList<Drawable>();
 		/*getPlayer().setTexture("src/main/resources/Images/SpriteSheet.png", 75, 96);
 		getPlayer().addAnimation("Idle", new Vector2f(2, 2), new Vector2f(2, 2), 2, 1, true);
 		getPlayer().addAnimation("Walk", new Vector2f(0, 0), new Vector2f(5, 1), 5, 15, true);
@@ -61,10 +76,24 @@ public class Level extends Component{
         }catch (SlickException e){
         	e.printStackTrace();
         	throw new RuntimeException(e);
-        }/*
+        }
+		//createBox();
+		/*
 		for(GameObject obj : objects){
 			obj.finalisePositions();
 		}*/
+	}
+
+	private void createBox() {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.STATIC;
+		bodyDef.position.set(new Vec2());
+		Body body = this.getWorld().createBody(bodyDef);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(0, height);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		body.createFixture(fixtureDef);
 	}
 	public void update(int delta) {
 		
@@ -78,11 +107,10 @@ public class Level extends Component{
 		renderTargetGraph.setBackground(new Color(5, 34, 69));
     	renderTargetGraph.clear();
     	
-		
 		bg.draw(renderTargetGraph);
-		/*for (GameObject obj : objects) {
+		for (Drawable obj : drawList) {
 			obj.draw(renderTargetGraph);
-		}*/
+		}
 
     	renderTargetGraph.flush();
 	}
@@ -112,5 +140,17 @@ public class Level extends Component{
 
 	public Image getRenderTarget() {
 		return renderTarget;
+	}
+
+	public List<Drawable> getDrawList() {
+		return drawList;
+	}
+
+	public Vec2 getGravity() {
+		return getWorld().getGravity();
+	}
+
+	public void setGravity(Vec2 gravity) {
+		getWorld().setGravity(gravity);
 	}
 }
