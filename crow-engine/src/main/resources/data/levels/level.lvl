@@ -27,6 +27,22 @@
             "startPositionY" : "0",
             "density" : "1",
             "friction" : "0.3"
+        },
+	"4": {
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
+            "bodyType" : "DYNAMIC",
+             "startPositionX" : "80",
+            "startPositionY" : "300",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+	"5": {
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "45",
+            "startPositionY" : "200",
+            "density" : "1",
+            "friction" : "0.3"
         }
     }
 }
