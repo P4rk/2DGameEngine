@@ -5,7 +5,7 @@ public enum Options {
 
 	private boolean _fullScreen=true;
 	private boolean _pasued=false;
-	private boolean _debug=true;
+	private boolean _debug=false;
 	
 	public boolean isFullScreen() {
 		return _fullScreen;
@@ -36,3 +36,4 @@ public enum Options {
 		this._debug = _debug;
 	}
 }
+//james was testing here

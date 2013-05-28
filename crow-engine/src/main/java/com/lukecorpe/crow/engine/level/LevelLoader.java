@@ -41,8 +41,8 @@ public class LevelLoader {
 	private static void createLevel(Map<String, Object> levelMap, Game game) {
 		Level level = new Level(game);
 		
-		level.setWidth((int) levelMap.get("width"));
-		level.setHeight((int) levelMap.get("height"));
+		level.setWidth((Integer) levelMap.get("width"));
+		level.setHeight((Integer) levelMap.get("height"));
 		
 		createObjects((Map)levelMap.get("levelObjects"), level);
 		

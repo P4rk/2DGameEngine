@@ -43,6 +43,14 @@
             "startPositionY" : "200",
             "density" : "1",
             "friction" : "0.3"
-        }
+        },
+    "6": {
+            "relitaveImagePath" : "src/main/resources/images/plank.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "400",
+            "startPositionY" : "200",
+            "density" : "1",
+            "friction" : "0.3"
+        }    
     }
 }
