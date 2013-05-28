@@ -36,4 +36,4 @@ public enum Options {
 		this._debug = _debug;
 	}
 }
-//james was testing here
+//removing my test comment(?!)
