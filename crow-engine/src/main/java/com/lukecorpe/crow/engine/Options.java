@@ -4,7 +4,7 @@ public enum Options {
 	Instance; 
 
 	private boolean _fullScreen=true;
-	private boolean _pasued=false;
+	private boolean _paused=false;
 	private boolean _debug=false;
 	
 	public boolean isFullScreen() {
@@ -20,13 +20,21 @@ public enum Options {
 		setPasued(false);
 	}
 	public void flipPause(){
-		setPasued(!_pasued);
+		setPasued(!_paused);
 	}
+	
+	//left these 'pasued' in to not break compatibility
 	public boolean isPasued() {
-		return _pasued;
+		return isPaused();
 	}
 	public void setPasued(boolean _pasued) {
-		this._pasued = _pasued;
+		setPaused(_pasued);
+	}
+	public boolean isPaused(){
+		return _paused;
+	}
+	public void setPaused(boolean _paused){
+		this._paused = _paused;
 	}
 
 	public boolean isDebug() {
@@ -35,4 +43,8 @@ public enum Options {
 	public void setDebug(boolean _debug) {
 		this._debug = _debug;
 	}
+	
+	
+	
+	
 }
