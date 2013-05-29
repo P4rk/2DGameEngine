@@ -112,19 +112,19 @@ public class Level extends Component{
 			switch(i){
 				case 0:
 					//Top
-					shape.setAsBox(width/2, 0);
+					shape.setAsBox(width, 0);
 					break;
 				case 1:
 					//Right
-					shape.setAsBox(0, height/2);
+					shape.setAsBox(0, height);
 					break;
 				case 2:
 					//Bottom
-					shape.setAsBox(width/2, 0);
+					shape.setAsBox(width, 0);
 					break;
 				case 3:
 					//Left
-					shape.setAsBox(0, height/2);
+					shape.setAsBox(0, height);
 					break;
 			}
 			FixtureDef fixtureDef = new FixtureDef();
