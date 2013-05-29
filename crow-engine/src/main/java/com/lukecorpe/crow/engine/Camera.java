@@ -301,8 +301,8 @@ public class Camera extends Component{
     		getGame().getCurrentMenu().draw();
     		break;
     	case inGame:
-        	getGame().getCurrentLevel().draw();
-        	//RenderInGameMenu
+        	getGame().getPostProcessor().draw();
+    	    //RenderInGameMenu
         	if(Options.Instance.isPasued()){
         		getGame().getCurrentLevel().getRenderTarget().setAlpha(0.5f);
         		//Render Menu Items

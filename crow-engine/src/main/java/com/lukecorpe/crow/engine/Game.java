@@ -28,6 +28,7 @@ public class Game extends BasicGame {
 	private int currentMenuNum = 0;
 	private int previousMenuNum =-1;
 	
+	private PostProcessor postProcessor;
 	
 	private GameState gameState = GameState.splashScreen;
 	
@@ -111,6 +112,10 @@ public class Game extends BasicGame {
     	
     	cam = new Camera(this);
     	
+    	postProcessor = new PostProcessor(this);
+    	postProcessor.init();
+    	
+    	
     	LevelLoader.loadLevel("src/main/resources/data/levels/level.lvl", this);
     	
     	//http://www.java-gaming.org/index.php/topic,24671.0
@@ -130,7 +135,7 @@ public class Game extends BasicGame {
     	if(getInput().isKeyDown(Input.KEY_ESCAPE)) container.exit();
 		if(getInput().isKeyDown(Input.KEY_P)) Options.Instance.flipPause();
 		if(getInput().isKeyDown(Input.KEY_ENTER)) setGameState(GameState.inGame);
-		if(getInput().isKeyDown(Input.KEY_SPACE)) getCurrentLevel().setGravity(new Vec2(0, -getCurrentLevel().getGravity().y));
+		if(getInput().isKeyDown(Input.KEY_SPACE)) getCurrentLevel().setGravity(new Vec2(-getCurrentLevel().getGravity().x, -getCurrentLevel().getGravity().y));
         getCam().update(delta);
     }
 
@@ -144,7 +149,15 @@ public class Game extends BasicGame {
     	}
     }
 
-	public static void main(String[] args) {
+	public PostProcessor getPostProcessor() {
+        return postProcessor;
+    }
+
+    public void setPostProcessor(PostProcessor postProcessor) {
+        this.postProcessor = postProcessor;
+    }
+
+    public static void main(String[] args) {
 		try {
         	AppGameContainer app=null;
         	try{

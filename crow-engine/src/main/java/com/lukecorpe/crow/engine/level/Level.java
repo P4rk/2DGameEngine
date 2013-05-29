@@ -40,7 +40,7 @@ public class Level extends Component{
     int velocityIterations;
     int positionIterations;
     
-    Vec2 intiGravity = new Vec2(0, 98f);
+    Vec2 intiGravity = new Vec2(0f,98f);
     
 	public Level(Game game){
 		super(game);
@@ -92,19 +92,19 @@ public class Level extends Component{
 			switch(i){
 				case 0:
 					//Top
-					bodyDef.position.set(new Vec2(0,0));
+					bodyDef.position.set(new Vec2(width/2,0));
 					break;
 				case 1:
 					//Right
-					bodyDef.position.set(new Vec2(width,0));
+					bodyDef.position.set(new Vec2(width,height/2));
 					break;
 				case 2:
 					//Bottom
-					bodyDef.position.set(new Vec2(0,height));
+					bodyDef.position.set(new Vec2(width/2,height));
 					break;
 				case 3:
 					//Left
-					bodyDef.position.set(new Vec2(0,0));
+					bodyDef.position.set(new Vec2(0,height/2));
 					break;
 			}
 			Body body = this.getWorld().createBody(bodyDef);
