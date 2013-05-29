@@ -51,6 +51,30 @@
             "startPositionY" : "200",
             "density" : "1",
             "friction" : "0.3"
-        }
+        },
+    "7": {
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "670",
+            "startPositionY" : "200",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "8": {
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "740",
+            "startPositionY" : "100",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "9": {
+            "relitaveImagePath" : "src/main/resources/images/crate.png",
+            "bodyType" : "DYNAMIC",
+            "startPositionX" : "560",
+            "startPositionY" : "100",
+            "density" : "1",
+            "friction" : "0.3"
+        }          
     }
 }
