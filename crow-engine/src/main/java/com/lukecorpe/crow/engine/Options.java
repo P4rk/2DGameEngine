@@ -30,7 +30,6 @@ public enum Options {
 		setPaused(!_paused);
 	}
 	
-	//left these 'pasued' in to not break compatibility
 	public boolean isPaused(){
 		return _paused;
 	}
