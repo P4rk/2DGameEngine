@@ -6,8 +6,15 @@ public enum Options {
 	private boolean _fullScreen=true;
 	private boolean _paused=false;
 	private boolean _debug=true;
+	private boolean _postProcessor=false;
 	
-	public boolean isFullScreen() {
+	public boolean isPostProcessorOn() {
+        return _postProcessor;
+    }
+    public void setPostProcessorOn(boolean _postProcessor) {
+        this._postProcessor = _postProcessor;
+    }
+    public boolean isFullScreen() {
 		return _fullScreen;
 	}
 	public void setFullScreen(boolean _fullScreen) {
@@ -37,8 +44,4 @@ public enum Options {
 	public void setDebug(boolean _debug) {
 		this._debug = _debug;
 	}
-	
-	
-	
-	
 }

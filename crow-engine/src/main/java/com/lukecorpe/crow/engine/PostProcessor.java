@@ -45,15 +45,18 @@ public class PostProcessor extends Component{
     }
 
     public void draw() {
+        boolean bound = false;
         //start using our program
-        if (shaderWorks)
+        if (shaderWorks && Options.Instance.isPostProcessorOn()){
+            bound=true;
             program.bind();
+        }
         
         //render our shapes with the shader enabled
         getGame().getCurrentLevel().draw();
         
         //stop using our program
-        if (shaderWorks)
+        if (shaderWorks && bound)
             program.unbind();
     }
 }
