@@ -154,7 +154,7 @@ public class Camera extends Component{
         		getGame().getCurrentMenu().update(delta);
         		break;
         	case inGame:
-        		if(!Options.Instance.isPasued()){
+        		if(!Options.Instance.isPaused()){
         	    	//setPosition(new Vector2f(this.getPosition().getX()-0.1f, this.getPosition().getY()-0.1f));
         	        if (HasGameObjectTarget)
         	        {
@@ -303,7 +303,7 @@ public class Camera extends Component{
     	case inGame:
         	getGame().getPostProcessor().draw();
     	    //RenderInGameMenu
-        	if(Options.Instance.isPasued()){
+        	if(Options.Instance.isPaused()){
         		getGame().getCurrentLevel().getRenderTarget().setAlpha(0.5f);
         		//Render Menu Items
             	//TODO

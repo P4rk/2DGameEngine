@@ -5,7 +5,7 @@ public enum Options {
 
 	private boolean _fullScreen=true;
 	private boolean _paused=false;
-	private boolean _debug=false;
+	private boolean _debug=true;
 	
 	public boolean isFullScreen() {
 		return _fullScreen;
@@ -14,22 +14,16 @@ public enum Options {
 		this._fullScreen = _fullScreen;
 	}
 	public void pause() {
-		setPasued(true);
+		setPaused(true);
 	}
 	public void resume() {
-		setPasued(false);
+		setPaused(false);
 	}
 	public void flipPause(){
-		setPasued(!_paused);
+		setPaused(!_paused);
 	}
 	
 	//left these 'pasued' in to not break compatibility
-	public boolean isPasued() {
-		return isPaused();
-	}
-	public void setPasued(boolean _pasued) {
-		setPaused(_pasued);
-	}
 	public boolean isPaused(){
 		return _paused;
 	}
