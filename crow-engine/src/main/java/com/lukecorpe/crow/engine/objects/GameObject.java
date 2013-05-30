@@ -1,5 +1,7 @@
 package com.lukecorpe.crow.engine.objects;
 
+import java.util.Arrays;
+
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -15,10 +17,14 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.geom.Vector2f;
 
+import com.lukecorpe.crow.engine.Constants;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.Options;
 import com.lukecorpe.crow.engine.interfaces.Drawable;
 import com.lukecorpe.crow.engine.level.Level;
+
+import static com.lukecorpe.crow.engine.Constants.fromPhysicsSize;
+import static com.lukecorpe.crow.engine.Constants.toPhysicsSize;
 
 public class GameObject implements Drawable {
 
@@ -45,14 +51,14 @@ public class GameObject implements Drawable {
 		
 		bodyDef = new BodyDef();
 		bodyDef.type = type;
-		bodyDef.position.set(startPostion);
+		bodyDef.position.set(toPhysicsSize(startPostion));
 		body = level.getWorld().createBody(bodyDef);
 		setPosition(startPostion.x, startPostion.y);
 		
 		if(shapeCoordinates==null){
 			shape = new PolygonShape();
-			float hy = _texture.getHeight()/2;
-			float hx = _texture.getWidth()/2;
+			float hy = toPhysicsSize(_texture.getHeight())/2;
+			float hx = toPhysicsSize(_texture.getWidth())/2;
 			Vec2[] points = {
 					new Vec2(-hx, -hy),
 					new Vec2(hx, -hy),
@@ -86,40 +92,49 @@ public class GameObject implements Drawable {
 					getPosition().getX(),
 					getPosition().getY());
 			if(Options.Instance.isDebug()){
-				float[] points = new float[shape.getVertices().length*2];
+				float[] points = new float[shape.getVertices().length*2+2];
 				int pointCount=0;
 				for(int i=0; i<shape.getVertices().length; i++){
-					points[pointCount] = shape.getVertices()[i].x;
-					points[pointCount+1] = shape.getVertices()[i].y;
-					pointCount+=2;
+    					points[pointCount] = fromPhysicsSize(shape.getVertices()[i].x);
+    					points[pointCount+1] = fromPhysicsSize(shape.getVertices()[i].y);
+    					pointCount+=2;
+				    
 				}
+				points[5] = fromPhysicsSize(shape.getVertices()[0].x);
+				points[6] = fromPhysicsSize(shape.getVertices()[0].y);
 				Polygon polygon = new Polygon(points);
 				polygon = (Polygon) polygon.transform(Transform.createRotateTransform(body.getAngle()));
-				polygon.setX(body.getPosition().x);
-				polygon.setY(body.getPosition().y);
+				polygon.setX(fromPhysicsSize(body.getPosition().x));
+				polygon.setY(fromPhysicsSize(body.getPosition().y));
+				polygon.setClosed(true);
 				renderTargetGraph.fill(polygon);
-				renderTargetGraph.draw(polygon);	
+				renderTargetGraph.draw(polygon);
 			}
 		}
 		//System.out.printf("%4.2f %4.2f %4.2f\n", getPosition().x, getPosition().y,  Math.toDegrees(body.getAngle()));
 	}
 	
 	public Vector2f getPosition() {
-		return new Vector2f(body.getPosition().x-_texture.getWidth()/2, body.getPosition().y-_texture.getHeight()/2);
+		return new Vector2f(
+		        fromPhysicsSize(body.getPosition().x)-_texture.getWidth()/2,
+		        fromPhysicsSize(body.getPosition().y)-_texture.getHeight()/2);
 	}
 
 	public Vector2f getPositionCenter() {
-		return new Vector2f(body.getPosition().x + _texture.getWidth()/2,
-				body.getPosition().y + _texture.getHeight()/2);
+		return new Vector2f(
+		        fromPhysicsSize(body.getPosition().x )+ _texture.getWidth()/2,
+		        fromPhysicsSize(body.getPosition().y )+ _texture.getHeight()/2);
 	}
 
 	public void setPosition(float x, float y) {
-		body.getPosition().set(x+_texture.getWidth()/2,y+_texture.getHeight()/2);
+		body.getPosition().set(
+		        toPhysicsSize(x)+toPhysicsSize(_texture.getWidth())/2,
+		        toPhysicsSize(y)+toPhysicsSize(_texture.getHeight())/2);
 	}
 
 	public void setPosition(Vector2f _position) {
-		body.getPosition().x = _position.x;
-		body.getPosition().y = _position.y;
+		body.getPosition().x = toPhysicsSize(_position.x);
+		body.getPosition().y = toPhysicsSize(_position.y);
 	}
 	
 	public Level getLevel(){

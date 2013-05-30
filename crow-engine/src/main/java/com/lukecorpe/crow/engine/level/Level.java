@@ -19,6 +19,8 @@ import com.lukecorpe.crow.engine.Component;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.interfaces.Drawable;
 import com.lukecorpe.crow.engine.interfaces.Updatable;
+import static com.lukecorpe.crow.engine.Constants.fromPhysicsSize;
+import static com.lukecorpe.crow.engine.Constants.toPhysicsSize;
 
 public class Level extends Component{
 	
@@ -36,11 +38,13 @@ public class Level extends Component{
 	
 	private List<Drawable> drawList;
 	
-	float timeStep;
-    int velocityIterations;
-    int positionIterations;
+	private float timeStep;
+    private int velocityIterations;
+    private int positionIterations;
     
-    Vec2 intiGravity = new Vec2(0f,98f);
+    
+    
+    Vec2 intiGravity = new Vec2(0f,20f);
     
 	public Level(Game game){
 		super(game);
@@ -92,19 +96,19 @@ public class Level extends Component{
 			switch(i){
 				case 0:
 					//Top
-					bodyDef.position.set(new Vec2(width/2,0));
+					bodyDef.position.set(toPhysicsSize(new Vec2(width/2,0)));
 					break;
 				case 1:
 					//Right
-					bodyDef.position.set(new Vec2(width,height/2));
+					bodyDef.position.set(toPhysicsSize(new Vec2(width,height/2)));
 					break;
 				case 2:
 					//Bottom
-					bodyDef.position.set(new Vec2(width/2,height));
+					bodyDef.position.set(toPhysicsSize(new Vec2(width/2,height)));
 					break;
 				case 3:
 					//Left
-					bodyDef.position.set(new Vec2(0,height/2));
+					bodyDef.position.set(toPhysicsSize(new Vec2(0,height/2)));
 					break;
 			}
 			Body body = this.getWorld().createBody(bodyDef);
@@ -112,19 +116,19 @@ public class Level extends Component{
 			switch(i){
 				case 0:
 					//Top
-					shape.setAsBox(width/2, 0);
+					shape.setAsBox(toPhysicsSize(width/2), 0);
 					break;
 				case 1:
 					//Right
-					shape.setAsBox(0, height/2);
+					shape.setAsBox(0, toPhysicsSize(height/2));
 					break;
 				case 2:
 					//Bottom
-					shape.setAsBox(width/2, 0);
+					shape.setAsBox(toPhysicsSize(width/2), 0);
 					break;
 				case 3:
 					//Left
-					shape.setAsBox(0, height/2);
+					shape.setAsBox(0, toPhysicsSize(height/2));
 					break;
 			}
 			FixtureDef fixtureDef = new FixtureDef();
