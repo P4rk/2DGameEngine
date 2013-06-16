@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import com.lukecorpe.crow.engine.math.MathUtils;
 import com.lukecorpe.crow.engine.objects.GameObject;
+import com.lukecorpe.crow.engine.objects.Hero;
 
 public class Camera extends Component{
 	
@@ -323,10 +324,14 @@ public class Camera extends Component{
 	    	getGame().getContainer().getGraphics().drawString("Camera position : "+ getPosition(), 10, 30);
 
 	    	//getGame().getContainer().getGraphics().drawString("Target position : "+ getTarget().getPosition(), 10,50);
-	    	getGame().getContainer().getGraphics().drawString("Gravity "+getGame().getCurrentLevel().getGravity(), 10, 90);
+	    	getGame().getContainer().getGraphics().drawString("Gravity "+getGame().getCurrentLevel().getGravity(), 10, 110);
 
 	    	if(getTarget()!=null) {
 	    		getGame().getContainer().getGraphics().drawString("Target position : "+ getTarget().getPosition(), 10, 50 );
+	    		if(getTarget() instanceof Hero){
+    	    		getGame().getContainer().getGraphics().drawString("Colliding : "+((Hero) getTarget()).isColliding(), 10, 70);
+    	    		getGame().getContainer().getGraphics().drawString("onGround : "+((Hero) getTarget()).isOnGround() , 10, 90);
+	    		}
 	    	}else {
 	    		getGame().getContainer().getGraphics().drawString("Target position : null", 10, 50);
 	    	}

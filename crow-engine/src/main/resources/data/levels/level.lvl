@@ -4,7 +4,7 @@
     "width" : 800,
     "height" : 600,
     "levelObjects" : {
-        "1": {
+        "hero": {
             "relitaveImagePath" : "src/main/resources/images/crate.png",
             "bodyType" : "DYNAMIC",
             "startPositionX" : "45",
@@ -75,6 +75,86 @@
             "startPositionY" : "100",
             "density" : "1",
             "friction" : "0.3"
-        }          
+        },
+    "floor1":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "0",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor2":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "70",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor3":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "140",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor4":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "210",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor5":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "280",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor6":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "350",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor7":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "420",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor8":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "490",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor9":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "560",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        },
+    "floor10":{
+            "relitaveImagePath" : "src/main/resources/images/block.png",
+            "bodyType" : "STATIC",
+            "startPositionX" : "630",
+            "startPositionY" : "500",
+            "density" : "1",
+            "friction" : "0.3"
+        }    
     }
 }

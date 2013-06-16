@@ -2,8 +2,11 @@ package com.lukecorpe.crow.engine;
 
 import java.util.ArrayList;
 
+import org.jbox2d.common.Sweep;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.contacts.ContactEdge;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -15,6 +18,7 @@ import com.lukecorpe.crow.engine.level.Level;
 import com.lukecorpe.crow.engine.level.LevelLoader;
 import com.lukecorpe.crow.engine.menu.Menu;
 import com.lukecorpe.crow.engine.objects.GameObject;
+import com.lukecorpe.crow.engine.objects.Hero;
 
 public class Game extends BasicGame {
 	
@@ -129,14 +133,30 @@ public class Game extends BasicGame {
     	ap.setDisplayMode(ap.getScreenWidth(),ap.getScreenHeight(), Options.Instance.isFullScreen());
     }
     
-        @Override
+    @Override
     public void update(GameContainer container, int delta)
             throws SlickException {
+        if(getInput().isKeyDown(Input.KEY_F3)) Options.Instance.setDebug(!Options.Instance.isDebug());
     	if(getInput().isKeyDown(Input.KEY_ESCAPE)) container.exit();
 		if(getInput().isKeyDown(Input.KEY_P)) Options.Instance.flipPause();
 		if(getInput().isKeyDown(Input.KEY_ENTER)) setGameState(GameState.inGame);
 		if(getInput().isKeyDown(Input.KEY_SPACE)) getCurrentLevel().setGravity(new Vec2(-getCurrentLevel().getGravity().x, -getCurrentLevel().getGravity().y));
         getCam().update(delta);
+        
+        updateHeroMovement();
+    }
+
+    private void updateHeroMovement() {
+        Hero heroBody = getCurrentLevel().getHero();
+        heroBody.getBody().setAwake(true);
+        if(getInput().isKeyDown(Input.KEY_RIGHT)) heroBody.getBody().m_linearVelocity.x = 5;
+        if(getInput().isKeyDown(Input.KEY_LEFT)) heroBody.getBody().m_linearVelocity.x = -5;
+        if(getInput().isKeyDown(Input.KEY_UP)) {
+            if(heroBody.getBody().getLinearVelocity().y > -1 && heroBody.isOnGround()){
+                heroBody.getBody().m_linearVelocity.y -= 50;
+                heroBody.getBody().setAngularVelocity(0);
+            }
+        }
     }
 
     public void render(GameContainer container, Graphics g)

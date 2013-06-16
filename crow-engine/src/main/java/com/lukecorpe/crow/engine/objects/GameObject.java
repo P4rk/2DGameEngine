@@ -17,6 +17,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.geom.Vector2f;
 
+import com.lukecorpe.crow.engine.Component;
 import com.lukecorpe.crow.engine.Constants;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.Options;
@@ -26,27 +27,27 @@ import com.lukecorpe.crow.engine.level.Level;
 import static com.lukecorpe.crow.engine.Constants.fromPhysicsSize;
 import static com.lukecorpe.crow.engine.Constants.toPhysicsSize;
 
-public class GameObject implements Drawable {
+public class GameObject extends Component implements Drawable {
 
-	BodyDef bodyDef;
-	Body body;
-	PolygonShape shape;
-	FixtureDef fixtureDef;
+	private BodyDef bodyDef;
+	private Body body;
+
+    private PolygonShape shape;
+	private FixtureDef fixtureDef;
 	
-	float density = 1.0f, friction = 0.3f;
-	Vec2[] shapeCoordinates;
+	private float density = 1.0f, friction = 0.3f;
+	private Vec2[] shapeCoordinates;
 	
-	Image _texture;
+	private Image _texture;
 	
-	Level level;
+	private boolean isFlipVertically;
 	
-	boolean isFlipVertically;
+	private boolean isHero = false;
 	
 	public GameObject(Level level, BodyType type, Vec2 startPostion, String imagePath) throws SlickException{
-		this.level = level;
+		super(level.getGame());
 		
 		_texture = new Image(imagePath);
-	    level.getDrawList().add(this);
 	    _texture.setCenterOfRotation(_texture.getWidth()/2, _texture.getHeight()/2);
 		
 		bodyDef = new BodyDef();
@@ -75,17 +76,17 @@ public class GameObject implements Drawable {
 	    fixtureDef.density = density;
 	    fixtureDef.friction = friction;
 	    body.createFixture(fixtureDef);
+	    body.setUserData(this);
 	}
 	
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-		
+	    getBody().applyForce(new Vec2(0, -20), getBody().getWorldCenter());
 	}
 
 	@Override
 	public void draw(Graphics renderTargetGraph) {
-		if(getLevel().getGame().getCam().inFrame(this)){
+		if(getGame().getCam().inFrame(this)){
 			getTexture().setRotation((float) Math.toDegrees(body.getAngle()));
 			renderTargetGraph.drawImage(
 					getTexture(),
@@ -100,20 +101,24 @@ public class GameObject implements Drawable {
     					pointCount+=2;
 				    
 				}
-				points[5] = fromPhysicsSize(shape.getVertices()[0].x);
-				points[6] = fromPhysicsSize(shape.getVertices()[0].y);
 				Polygon polygon = new Polygon(points);
 				polygon = (Polygon) polygon.transform(Transform.createRotateTransform(body.getAngle()));
 				polygon.setX(fromPhysicsSize(body.getPosition().x));
 				polygon.setY(fromPhysicsSize(body.getPosition().y));
 				polygon.setClosed(true);
-				renderTargetGraph.fill(polygon);
+				//renderTargetGraph.fill(polygon);
 				renderTargetGraph.draw(polygon);
 			}
 		}
 		//System.out.printf("%4.2f %4.2f %4.2f\n", getPosition().x, getPosition().y,  Math.toDegrees(body.getAngle()));
 	}
 	
+	public Body getBody() {
+	    return body;
+	}
+	public void setBody(Body body) {
+	    this.body = body;
+	}
 	public Vector2f getPosition() {
 		return new Vector2f(
 		        fromPhysicsSize(body.getPosition().x)-_texture.getWidth()/2,
@@ -137,9 +142,6 @@ public class GameObject implements Drawable {
 		body.getPosition().y = toPhysicsSize(_position.y);
 	}
 	
-	public Level getLevel(){
-		return level;
-	}
 	
 	public Image getTexture(){
 		return _texture;
@@ -166,5 +168,21 @@ public class GameObject implements Drawable {
 	public void setFriction(float friction) {
 		this.friction = friction;
 	}
+
+	public boolean isHero() {
+        return isHero;
+    }
+
+    public void setHero(boolean isHero) {
+        this.isHero = isHero;
+    }
+    
+    public float getTop(){
+        return getPosition().y;
+    }
+
+    public float getBottom(){
+        return getPosition().y+getTexture().getHeight();
+    }
 
 }

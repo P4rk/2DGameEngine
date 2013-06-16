@@ -1,5 +1,7 @@
 package com.lukecorpe.crow.engine.level;
 
+import static com.lukecorpe.crow.engine.Constants.toPhysicsSize;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,7 @@ import com.lukecorpe.crow.engine.Component;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.interfaces.Drawable;
 import com.lukecorpe.crow.engine.interfaces.Updatable;
-import static com.lukecorpe.crow.engine.Constants.fromPhysicsSize;
-import static com.lukecorpe.crow.engine.Constants.toPhysicsSize;
+import com.lukecorpe.crow.engine.objects.Hero;
 
 public class Level extends Component{
 	
@@ -42,8 +43,9 @@ public class Level extends Component{
     private int velocityIterations;
     private int positionIterations;
     
+    private Hero Hero; 
     
-    
+
     Vec2 intiGravity = new Vec2(0f,20f);
     
 	public Level(Game game){
@@ -58,6 +60,9 @@ public class Level extends Component{
 	    positionIterations = 2;
 		
 	    drawList = new ArrayList<Drawable>();
+
+	    HeroContantListener heroContantListener = new HeroContantListener();
+	    world.setContactListener(heroContantListener);
 	    
 		/*getPlayer().setTexture("src/main/resources/Images/SpriteSheet.png", 75, 96);
 		getPlayer().addAnimation("Idle", new Vector2f(2, 2), new Vector2f(2, 2), 2, 1, true);
@@ -136,13 +141,12 @@ public class Level extends Component{
 			body.createFixture(fixtureDef);
 		}
 	}
-	public void update(int delta) {
-		
+	public void update(int delta) {		
 		bg.update(delta);
-		world.step(timeStep, velocityIterations, positionIterations);
 		for (Updatable obj : drawList) {
-			obj.update(delta);
+		    obj.update(delta);
 		}
+		world.step(timeStep, velocityIterations, positionIterations);
 	}
 	public void draw(){
 		renderTargetGraph.setBackground(new Color(5, 34, 69));
@@ -161,6 +165,14 @@ public class Level extends Component{
 	public String getTilePath(String key){
 		//return tileReference.get(key);
 	}*/
+	
+	public Hero getHero() {
+	    return Hero;
+	}
+	
+	public void setHero(Hero hero) {
+	    Hero = hero;
+	}
 	public int getWidth() {
 		return width;
 	}

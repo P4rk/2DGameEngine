@@ -1,7 +1,6 @@
 package com.lukecorpe.crow.engine.level;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
@@ -10,11 +9,10 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 import org.newdawn.slick.SlickException;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lukecorpe.crow.engine.Game;
 import com.lukecorpe.crow.engine.objects.GameObject;
+import com.lukecorpe.crow.engine.objects.Hero;
 
 public class LevelLoader {
 	public static void loadLevel(String filePath, Game game){
@@ -53,21 +51,41 @@ public class LevelLoader {
 	private static void createObjects(Map<String, Object> objectsMap, Level level) {
 		for(String s : objectsMap.keySet()){
 			Map<String, Object> objectMap = (Map<String, Object>)objectsMap.get(s);
+			GameObject obj;			
 			try {
-				GameObject obj = new GameObject(
-						level, 
-						BodyType.valueOf((String)objectMap.get("bodyType")), 
-						new Vec2(
-								Float.valueOf((String)objectMap.get("startPositionX")), 
-								Float.valueOf((String)objectMap.get("startPositionY"))
-							), 
-						(String)objectMap.get("relitaveImagePath")
-						);
-				obj.setDensity(Float.valueOf((String)objectMap.get("density")));
-				obj.setFriction(Float.valueOf((String)objectMap.get("friction")));
+			    if(s.equalsIgnoreCase("hero")){
+			        Hero hero = new Hero(level, 
+                            BodyType.valueOf((String)objectMap.get("bodyType")), 
+                            new Vec2(
+                                    Float.valueOf((String)objectMap.get("startPositionX")), 
+                                    Float.valueOf((String)objectMap.get("startPositionY"))
+                                ), 
+                            (String)objectMap.get("relitaveImagePath")
+                            );
+                    hero.setDensity(Float.valueOf((String)objectMap.get("density")));
+                    hero.setFriction(Float.valueOf((String)objectMap.get("friction")));
+                    hero.setHero(true);
+                    level.setHero(hero);
+                    level.getGame().getCam().setTarget(hero);
+                    obj = hero;
+                }else{
+    				obj = new GameObject(
+    						level, 
+    						BodyType.valueOf((String)objectMap.get("bodyType")), 
+    						new Vec2(
+    								Float.valueOf((String)objectMap.get("startPositionX")), 
+    								Float.valueOf((String)objectMap.get("startPositionY"))
+    							), 
+    						(String)objectMap.get("relitaveImagePath")
+    						);
+    				obj.setDensity(Float.valueOf((String)objectMap.get("density")));
+    				obj.setFriction(Float.valueOf((String)objectMap.get("friction")));
+                }
 			} catch (SlickException e) {
 				throw new RuntimeException(e);
 			}
+			level.getDrawList().add(obj);
+			
 		}
 	}
 }

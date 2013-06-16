@@ -5,7 +5,7 @@ public enum Options {
 
 	private boolean _fullScreen=true;
 	private boolean _paused=false;
-	private boolean _debug=true;
+	private boolean _debug=false;
 	private boolean _postProcessor=false;
 	
 	public boolean isPostProcessorOn() {
